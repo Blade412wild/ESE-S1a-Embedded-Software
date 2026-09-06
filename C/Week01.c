@@ -1,6 +1,12 @@
 #include <stdio.h>
 
-int guesCounter = 10;
+const int maxGuesses = 10;
+const int secretNumber = 5;
+
+const int minRange;
+const int maxRange;
+
+int guesCounter = 10; // maxGuesses
 char playerName[30];
 
 
@@ -27,7 +33,7 @@ int main(){
 
 
     printf("Great <%s>, let's get started.\n", playerName);
-    printf("There is a secret number between 0 and 100, what is your first try:\n");
+    //printf("There is a secret number between 0 and 100, what is your first try:\n");
 
     return 0;
 
