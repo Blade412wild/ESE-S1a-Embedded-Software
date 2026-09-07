@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <string.h>
+
 
 #define MAXGUESSES 8
 
@@ -17,6 +19,14 @@ char playerName[30];
 const int hintActivationThreshold = 75;
 
 bool guesIsCorrect = false;
+
+typedef struct
+{
+    char PlayerName[20];
+    int Attemps
+} GameData;
+
+GameData currentGameData;
 
 // Method declarations
 void Introduction();
@@ -59,6 +69,7 @@ void Introduction()
 
     // fills in name
     scanf("%s", playerName);
+    strcpy(currentGameData.PlayerName, playerName);
     printf("\nGreat <%s>, let's get started. (%d Guesses left)\n", playerName, (maxGuesses - guesCounter));
 }
 
@@ -159,6 +170,7 @@ void PrintGuesHistory()
 
 void Win()
 {
+    currentGameData.Attemps = guesCounter;
 
     if (guesCounter == 1)
     {
@@ -174,8 +186,11 @@ void Win()
     }
 }
 
+
 void Lose()
 {
+    currentGameData.Attemps = maxGuesses;
+
     printf("I'm sorry you're out of guesses, See you next Time\n");
     PrintGuesHistory();
 
