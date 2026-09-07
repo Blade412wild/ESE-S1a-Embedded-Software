@@ -3,9 +3,6 @@
 const int maxGuesses = 10;
 const int secretNumber = 5;
 
-const int minRange;
-const int maxRange;
-
 int guesCounter = 10; // maxGuesses
 char playerName[30];
 
@@ -16,9 +13,9 @@ int main(){
     printf("Welcome to the guessing game!\n");
     printf("The objective of the game is to guess the secret number. You get : ");
 
-    printf("%d", guesCounter);
+    printf("%d", maxGuesses);
 
-    if(guesCounter == 1){
+    if(maxGuesses == 1){
         printf(" chance ...\n\n");
     }
     else{
@@ -38,3 +35,5 @@ int main(){
     return 0;
 
 }
+
+

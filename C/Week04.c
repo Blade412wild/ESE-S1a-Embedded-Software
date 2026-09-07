@@ -28,6 +28,7 @@ bool CheckIfInputIsValid(int userInput);
 void GiveUserAHint(int input);
 void AddGuesToHistory(int input, int index);
 void PrintGuesHistory();
+void PrintArray(int array[], int max, char arrayName[], char elementName[]);
 
 int main()
 {
@@ -54,10 +55,10 @@ void Introduction()
         printf(" chances...\n\n");
     }
 
-    printf("To address you personally, I would like to know your name.\n");
-    printf("your name: ");
+    printf("To address you personally, I would like to know your arrayName.\n");
+    printf("your Name: ");
 
-    // fills in name
+    // fills in arrayName
     scanf("%s", playerName);
     printf("\nGreat <%s>, let's get started. (%d Guesses left)\n", playerName, (maxGuesses - guesCounter));
 }
@@ -100,7 +101,6 @@ void AttemptGues()
             Lose();
         }
     }
-    //*/
 }
 
 int GetUserGues()
@@ -114,19 +114,15 @@ int GetUserGues()
 
 void GiveUserAHint(int input)
 {
-    // /*
-
     printf("\n the secret number is ");
     if (input < secretNumber)
     {
-
         printf("higher\n");
     }
     else if (input > secretNumber)
     {
         printf("lower\n");
     }
-    // */
 }
 
 bool CheckIfInputIsValid(int userInputPointer) // ervan uitgaan dat het een interger is
@@ -146,13 +142,17 @@ void AddGuesToHistory(int input, int index)
     guesCounter++;
 }
 
-void PrintGuesHistory()
+void PrintGuesHistory(){
+    PrintArray(guesHistory, guesCounter, "Gues History", "attempt");
+}
+
+void PrintArray(int array[], int max, char arrayName[], char elementName[])
 {
     printf("\n--------------------");
-    printf("\nGuesHistory\n");
-    for (int i = 0; i < guesCounter; i++)
+    printf("\n %s\n", arrayName);
+    for (int i = 0; i < max; i++)
     {
-        printf("attempt [%d] : %d \n", i, guesHistory[i]);
+        printf("%s %d : %d \n", elementName, i, array[i]);
     }
     printf("\n--------------------");
 }
