@@ -10,6 +10,8 @@ const int maxRange = 100;
 int guesCounter = 3; // maxGuesses
 char playerName[30];
 
+const int hintActivationThreshold = 75;
+
 bool guesIsCorrect = false;
 
 // Method declarations
@@ -18,6 +20,7 @@ void AttemptGues();
 int GetUserGues();
 int GetUserGues2();
 bool CheckIfInputIsValid(int userInput);
+void GiveUserAHint(int input);
 void Win();
 void Lose();
 
@@ -63,18 +66,17 @@ void AttemptGues()
         input = GetUserGues2();
         validInput = CheckIfInputIsValid(input); // belangrijk escape while loop
     }
+    
+    guesCounter--;
+    printf("out of while-loop");
 
     
-
-
-    printf("input was valid");
-    /*
-
     if (input == secretNumber)
     {
         guesIsCorrect = true;
     }
-
+    
+    
     if (guesIsCorrect)
     {
         Win();
@@ -91,7 +93,7 @@ void AttemptGues()
             Lose();
         }
     }
-    */
+    //*/
 }
 
 int GetUserGues2()
@@ -102,7 +104,7 @@ int GetUserGues2()
     scanf("%d", &userGues);
     return userGues;
 }
-
+/*
 int GetUserGues()
 {
     int userGues;
@@ -118,11 +120,32 @@ int GetUserGues()
     return userGues;
 }
 
+*/
+
+
+void GiveUserAHint(int input){
+    /*
+    
+    printf("a little hint : \n");
+
+    char hint[] = " ";
+
+    if(input < secretNumber){
+        hint = "higher";
+    }
+    else if(input > secretNumber){
+        hint = "lower";
+    }
+    printf("the secret number is %s\n", hint);
+    */
+    
+}
+
 bool CheckIfInputIsValid(int userInputPointer) // ervan uitgaan dat het een interger is
 {
     if (userInputPointer < minRange || userInputPointer > maxRange)
     {
-        printf("Input not in Range(%d-%d)", minRange, maxRange);
+        printf("Input not in Range(%d-%d)\n", minRange, maxRange);
         return false;
     }
 

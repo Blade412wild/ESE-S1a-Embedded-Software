@@ -1,1 +1,1 @@
-counter
+guesIsCorrect
