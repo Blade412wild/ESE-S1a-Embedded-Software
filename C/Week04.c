@@ -1,13 +1,17 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-const int maxGuesses = 8;
+#define MAXGUESSES 8
+
+const int maxGuesses = MAXGUESSES;
+int guesCounter = 0;
 const int secretNumber = 67;
+
+int guesHistory[MAXGUESSES];
 
 const int minRange = 0;
 const int maxRange = 100;
 
-int guesCounter = 8; // maxGuesses
 char playerName[30];
 
 const int hintActivationThreshold = 75;
@@ -16,13 +20,14 @@ bool guesIsCorrect = false;
 
 // Method declarations
 void Introduction();
+void Win();
+void Lose();
 void AttemptGues();
-int GetUserGues();
 int GetUserGues();
 bool CheckIfInputIsValid(int userInput);
 void GiveUserAHint(int input);
-void Win();
-void Lose();
+void AddGuesToHistory(int input, int index);
+void PrintGuesHistory();
 
 int main()
 {
@@ -38,9 +43,9 @@ void Introduction()
     printf("Welcome to the guessing game!\n");
     printf("The objective of the game is to guess the secret number between %d and %d You get : ", minRange, maxRange);
 
-    printf("%d", guesCounter);
+    printf("%d", maxGuesses);
 
-    if (guesCounter == 1)
+    if (maxGuesses == 1)
     {
         printf(" chance ...\n\n");
     }
@@ -54,8 +59,9 @@ void Introduction()
 
     // fills in name
     scanf("%s", playerName);
-    printf("\nGreat <%s>, let's get started. (%d Guesses left)\n", playerName, guesCounter);
+    printf("\nGreat <%s>, let's get started. (%d Guesses left)\n", playerName, (maxGuesses - guesCounter));
 }
+
 void AttemptGues()
 {
 
@@ -68,7 +74,7 @@ void AttemptGues()
         validInput = CheckIfInputIsValid(input); // belangrijk escape while loop
     }
 
-    guesCounter--;
+    AddGuesToHistory(input, guesCounter);
 
     if (input == secretNumber)
     {
@@ -81,11 +87,11 @@ void AttemptGues()
     }
     else
     {
-        if (guesCounter > 0)
+        if (guesCounter < maxGuesses)
         {
             printf("\nwrong...");
             GiveUserAHint(input);
-            printf("\ntry again (%d guesses left)\n", guesCounter);
+            printf("\ntry again (%d guesses left)\n", (maxGuesses - guesCounter));
 
             AttemptGues();
         }
@@ -134,23 +140,44 @@ bool CheckIfInputIsValid(int userInputPointer) // ervan uitgaan dat het een inte
     return true;
 }
 
+void AddGuesToHistory(int input, int index)
+{
+    guesHistory[index] = input;
+    guesCounter++;
+}
+
+void PrintGuesHistory()
+{
+    printf("\n--------------------");
+    printf("\nGuesHistory\n");
+    for (int i = 0; i < guesCounter; i++)
+    {
+        printf("attempt [%d] : %d \n", i, guesHistory[i]);
+    }
+    printf("\n--------------------");
+}
+
 void Win()
 {
 
-    int guesAttempts = maxGuesses - guesCounter;
-    if (guesAttempts == 1)
+    if (guesCounter == 1)
     {
-        printf("\nCongradulations you guessed correct!!\nYou did it in %d attempt", guesAttempts);
-        printf("\n\n---------------------------------");
+        printf("\nCongradulations you guessed correct!!\nYou did it in %d attempt", guesCounter);
+
+        printf("\n\n----------------END OF Game-----------------");
     }
     else
     {
-        printf("\nCongradulations you guessed correct!!\nYou did it in %d attempts", guesAttempts);
+        printf("\nCongradulations you guessed correct!!\nYou did it in %d attempts", guesCounter);
+
+        printf("\n\n----------------END OF Game-----------------");
     }
 }
 
 void Lose()
 {
-    printf("I'm sorry you're out of guesses, See you next Time");
-    printf("\n\n---------------------------------");
+    printf("I'm sorry you're out of guesses, See you next Time\n");
+    PrintGuesHistory();
+
+    printf("\n\n----------------END OF Game-----------------");
 }
