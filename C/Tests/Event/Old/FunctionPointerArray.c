@@ -1,11 +1,11 @@
 #include <stdio.h>
 
-void empty(){}
+void Empty(){}
 void add() { printf("Add\n"); }
 void subtract() { printf("Subtract\n"); }
 void multiply() { printf("Multiply\n"); }
-void (*operations[10])() = {add, subtract, multiply};
-void (*operations[10])() = {add, subtract, multiply};
+void (*ListenerArray[10])() = {add, subtract, multiply};
+void (*ListenerArray[10])() = {add, subtract, multiply};
 
 // function declaration
 void AddListener(void (*func)());
@@ -13,19 +13,19 @@ void Test();
 
 int main()
 {
-  int lenghtArray = sizeof(operations) / sizeof(operations[0]);
+  int lenghtArray = sizeof(ListenerArray) / sizeof(ListenerArray[0]);
 
   printf("size : %d\n", lenghtArray);
 
   AddListener(Test);
 
-  lenghtArray = sizeof(operations) / sizeof(operations[0]);
+  lenghtArray = sizeof(ListenerArray) / sizeof(ListenerArray[0]);
   printf("size : %d\n", lenghtArray);
 
   
   for (int i = 0; i < 3; i++)
   {
-    operations[i]();
+    ListenerArray[i]();
   }
   
 
@@ -34,7 +34,7 @@ int main()
 
 void AddListener(void (*func)())
 {
-  operations[2] = *func;
+  ListenerArray[2] = *func;
   //func();
 }
 

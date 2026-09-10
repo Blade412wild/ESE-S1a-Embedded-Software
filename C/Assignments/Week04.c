@@ -40,7 +40,7 @@ int main()
 void Introduction()
 {
     // introduction
-    printf("---------------------------------\n\n");
+    printf("---------------------------------\n\n")
     printf("Welcome to the guessing game!\n");
     printf("The objective of the game is to guess the secret number between %d and %d You get : ", minRange, maxRange);
 
