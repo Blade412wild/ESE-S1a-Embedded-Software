@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "Event.h"
 
-CustomEvent OnButtonPress;
+CustomEvent OnButtonPressLower;
 
 // function declaration
 // public
